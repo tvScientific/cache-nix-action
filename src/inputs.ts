@@ -78,14 +78,14 @@ export const gcMaxStoreSizeInputName = choose(
 
 export const gcMaxStoreSize = nix
     ? (function () {
-          const gcMaxStoreSize = utils.parseNixGcMax(Inputs.GCMaxStoreSize);
-          const gcMaxStoreSizePlatform = utils.parseNixGcMax(
-              gcMaxStoreSizeInputName
-          );
-          return gcMaxStoreSizePlatform !== undefined
-              ? gcMaxStoreSizePlatform
-              : gcMaxStoreSize;
-      })()
+        const gcMaxStoreSize = utils.parseNixGcMax(Inputs.GCMaxStoreSize);
+        const gcMaxStoreSizePlatform = utils.parseNixGcMax(
+            gcMaxStoreSizeInputName
+        );
+        return gcMaxStoreSizePlatform !== undefined
+            ? gcMaxStoreSizePlatform
+            : gcMaxStoreSize;
+    })()
     : undefined;
 
 export const purge = utils.getInputAsBool(Inputs.Purge);
@@ -115,13 +115,16 @@ export const token = core.getInput(Inputs.Token, { required: true });
 
 export enum Backend {
     Actions,
-    BuildJet
+    BuildJet,
+    RunsOn,
 }
 
 export const backend: Backend = (() => {
     const backend = core.getInput(Inputs.Backend);
     if (backend === "buildjet") {
         return Backend.BuildJet;
+    } else if (backend == "runs-on") {
+        return Backend.RunsOn;
     } else {
         return Backend.Actions;
     }

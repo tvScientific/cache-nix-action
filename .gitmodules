@@ -6,3 +6,6 @@
 	path = deps/buildjet/toolkit
 	url = https://github.com/nix-community/cache-nix-action
 	branch = buildjet-toolkit
+[submodule "deps/runs-on"]
+	path = deps/runs-on
+	url = https://github.com/runs-on/cache
